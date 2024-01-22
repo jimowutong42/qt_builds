@@ -25,15 +25,18 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
+      # Enable Developer Command Prompt
+      - uses: ilammy/msvc-dev-cmd@v1.13.0      
+
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
         run: |
-          Invoke-WebRequest -Uri https://download.qt.io/official_releases/qt/5.15/5.15.11/single/qt-everywhere-opensource-src-5.15.11.zip -OutFile qt_src_5.15.11.zip
-          Expand-Archive -Path qt_src_5.15.11.zip -DestinationPath .
+          Invoke-WebRequest -Uri https://download.qt.io/official_releases/qt/5.15/5.15.12/single/qt-everywhere-opensource-src-5.15.12.zip -OutFile qt_src_5.15.12.zip
+          Expand-Archive -Path qt_src_5.15.12.zip -DestinationPath .
           mkdir build_win64_msvc2019_shared
           mkdir win64_msvc2019_shared
           cd build_win64_msvc2019_shared
-          ..\qt-everywhere-src-5.15.11\configure.bat -shared -prefix "..\win64_msvc2019_shared" -confirm-license -opensource -debug-and-release -platform win32-msvc -qt-zlib -qt-libjpeg -qt-libpng -qt-freetype -qt-pcre -qt-harfbuzz -ssl -openssl-linked -sql-mysql -sql-odbc -sql-sqlite -opengl desktop -mp -silent -nomake examples -nomake tests
+          ..\qt-everywhere-src-5.15.12\configure.bat -shared -prefix "..\win64_msvc2019_shared" -confirm-license -opensource -debug-and-release -platform win32-msvc -qt-zlib -qt-libjpeg -qt-libpng -qt-freetype -qt-pcre -qt-harfbuzz -ssl -openssl-linked -sql-mysql -sql-odbc -sql-sqlite -opengl desktop -mp -silent -nomake examples -nomake tests
           nmake
           nmake install
           
